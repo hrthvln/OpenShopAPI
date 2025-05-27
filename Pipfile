@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 django = "*"
 djangorestframework = "*"
-django-filter = "*"
-djangorestframework-filters = "*"
+django-filter = ">=23.5"
+# djangorestframework-filters = "*"
 uuid = "*"
 
 [dev-packages]
