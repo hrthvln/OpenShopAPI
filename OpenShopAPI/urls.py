@@ -15,8 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
+# Buat router di tingkat proyek untuk API root
+router = DefaultRouter()
+# Tidak perlu mendaftarkan product di sini jika sudah di products/urls.py
+# Router di products/urls.py akan menangani URL untuk produk
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Sertakan URL dari aplikasi products
+    path('', include('products.urls')), # Ini akan menyertakan /products dari router
+    # Tambahkan API root dari router (DefaultRouter akan membuatnya otomatis)
+    path('api-root/', include(router.urls)), # Opsional, DefaultRouter sudah punya root default di '/'
 ]
