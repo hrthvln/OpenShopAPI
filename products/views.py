@@ -95,8 +95,8 @@ class ProductViewSet(viewsets.ModelViewSet):
         instance.save()
         # Mengembalikan status 204 No Content (Kriteria 4 Skilled)
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-     def list(self, request, *args, **kwargs):
+        
+    def list(self, request, *args, **kwargs):
         """
         Menangani daftar produk (GET /products).
         Mendukung pencarian berdasarkan nama dan lokasi (Kriteria 5).
