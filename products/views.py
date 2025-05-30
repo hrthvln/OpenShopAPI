@@ -96,7 +96,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         # Mengembalikan status 204 No Content (Kriteria 4 Skilled)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def list(self, request, *args, **kwargs):
+     def list(self, request, *args, **kwargs):
         """
         Menangani daftar produk (GET /products).
         Mendukung pencarian berdasarkan nama dan lokasi (Kriteria 5).
@@ -107,9 +107,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
-            # Mengembalikan response body dengan list products (Kriteria 5 Skilled)
-            return self.get_paginated_response({"products": serializer.data})
+            # Mengembalikan respons paginasi yang sudah diatur oleh CustomPagination
+            # CustomPagination.get_paginated_response() akan membungkus 'serializer.data'
+            # ke dalam kunci 'products'
+            return self.get_paginated_response(serializer.data) 
 
         serializer = self.get_serializer(queryset, many=True)
-        # Mengembalikan response body dengan list products (Kriteria 5 Skilled)
-        return Response({"products": serializer.data})
+        # Jika tidak ada paginasi (misalnya, page_size=0 atau tidak ada query param paginasi)
+        # Kita tetap membungkusnya secara manual dalam 'products'
+        return Response({"products": serializer.data}) 
