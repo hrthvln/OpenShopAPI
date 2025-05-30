@@ -139,6 +139,6 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend', # Untuk filtering
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10, # Opsional: Atur ukuran halaman default
+    'DEFAULT_PAGINATION_CLASS': 'products.pagination.CustomPagination', # Menggunakan kelas paginasi kustom
+    'PAGE_SIZE': 10, # Ukuran halaman default
 }
